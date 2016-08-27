@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRGame", "SignalRGame\SignalRGame.csproj", "{01798E4E-0BE5-4AAD-9608-F41AA0C085C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{677175F4-1740-4F74-AC25-A18DF3B204B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalRGameTest", "SignalRGameTest\SignalRGameTest.csproj", "{AE454CFA-D797-448B-AA25-855C7CE81FE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebUi", "WebUi\WebUi.csproj", "{69FA6029-2B3F-4487-BC17-F9FCFD5C36B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{01798E4E-0BE5-4AAD-9608-F41AA0C085C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01798E4E-0BE5-4AAD-9608-F41AA0C085C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01798E4E-0BE5-4AAD-9608-F41AA0C085C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01798E4E-0BE5-4AAD-9608-F41AA0C085C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE454CFA-D797-448B-AA25-855C7CE81FE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE454CFA-D797-448B-AA25-855C7CE81FE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE454CFA-D797-448B-AA25-855C7CE81FE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE454CFA-D797-448B-AA25-855C7CE81FE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69FA6029-2B3F-4487-BC17-F9FCFD5C36B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69FA6029-2B3F-4487-BC17-F9FCFD5C36B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69FA6029-2B3F-4487-BC17-F9FCFD5C36B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69FA6029-2B3F-4487-BC17-F9FCFD5C36B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AE454CFA-D797-448B-AA25-855C7CE81FE1} = {677175F4-1740-4F74-AC25-A18DF3B204B4}
+	EndGlobalSection
+EndGlobal

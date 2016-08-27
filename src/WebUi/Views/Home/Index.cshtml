@@ -1,0 +1,132 @@
+﻿@{
+    ViewBag.Title = "Bouncing ball";
+}
+<h2>Bouncing ball simulator</h2>
+<div class="container-fluid">
+    <div class="row" id="game-popup">
+        <div class="col-lg-12">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="username">Your name</label>
+                    <input type="text" class="form-control" id="usernametext" placeholder="Enter your name...">
+                </div>
+                <button class="btn btn-default" onclick="connect($('#usernametext').val())">Join!</button>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="game-main-container" >
+        <div class="col-lg-8 col-md-8">
+            <div class="row">
+                <canvas id="viewport" class="viewport-sm" width="580" height="350"></canvas>
+                <input type="hidden" id="playerName" />
+            </div>
+            <div class="row top-buffer">
+                Players count: <span id="playerscount">0</span>
+            </div>
+            <div class="row">
+               Set your color: <input type="color" id="colorPicker" onchange="" value="#ff0000" style="width:85%;">
+            </div>
+            
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <div class="form-inline row">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="message" placeholder="Say something...">
+                </div>
+                <button class="btn btn-default" id="sendmessage">Send</button>
+            </div>
+            <div class="row top-buffer">
+                <ul id="console"></ul>
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/app/main.js"></script>
+    <script>
+
+        var game;
+        var gameManager;
+
+        function connect(name) {
+
+            $("#game-popup").toggle();
+            $("#game-main-container").toggle();
+
+            game = $.connection.gameHub;
+            $.connection.hub.qs = "name=" + name;
+
+            game.client.addNewMessageToPage = function (name, message, type) {
+                $('#console').append('<li style="color: ' + resolveColor(type) + '"><strong>' + htmlEncode(name) + '</strong>: ' + message + '</li>');
+                $('#console').scrollTop($('#console')[0].scrollHeight);
+            };
+
+            game.client.setPlayersCount = function () {
+                var count = gameManager.circles.length;
+                $('#playerscount').html(count);
+            };
+
+            game.client.initializePlayers = function (data) {
+                data.forEach(function (player) {
+                    gameManager.addRandomCircle(player);
+                });
+                game.client.setPlayersCount();
+            }
+
+            game.client.updatePlayer = function (data) {
+                gameManager.updatePlayer(data);
+            }
+
+            game.client.addPlayer = function (data) {
+                gameManager.addPlayer(data);
+                game.client.setPlayersCount();
+            }
+
+            game.client.removePlayer = function (id) {
+                gameManager.removePlayer(id);
+                game.client.setPlayersCount();
+            }
+
+            $('#playerName').val(name);
+
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                $('#sendmessage').click(function () {
+                    game.server.send($('#message').val());
+                    $('#message').val('').focus();
+                });
+            });
+
+            $('#colorPicker').change(function () {
+                game.server.setColor($(this).val());
+            });
+
+            gameManager = new GameManager();
+
+            setInterval(gameManager.drawAll.bind(gameManager), 5);
+        }
+
+        function resolveColor(type) {
+            switch (type) {
+                case "system": return "#0000ff";
+                    break;
+                default: return "#333333";
+                    break;
+            }
+        }
+
+        // This optional function html-encodes messages for display in the page.
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
+    </script>
+    <script>
+
+    </script>
+}

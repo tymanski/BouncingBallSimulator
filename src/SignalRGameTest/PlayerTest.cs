@@ -26,8 +26,5 @@ namespace SignalRGameTest
             Assert.NotNull(player.DrawColor);
             Assert.IsNotEmpty(player.DrawColor);
         }
-
-
-        // todo test setting name not null nor empty
     }
 }
